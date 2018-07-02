@@ -34,6 +34,9 @@
     "webpack-glsl-loader": "^1.0.1"
   },
   "dependencies": {
-    "rxjs": "^5.5.7"
+    "pixi.js": "^4.8.1",
+    "rxjs": "^5.5.7",
+    "three-js": "^79.0.0",
+    "toxiclibsjs": "^0.3.3"
   }
 }
