@@ -11,6 +11,7 @@ uniform float uTime;
 void main() {
   vec4 color = texture2D(uSampler, vTextureCoord);
 
+  // TODO this could maybe optimised to not call the noise function if not needed
   float r = snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime + 1000.0));
   float g = snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime + 2000.0));
   float b = snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime));
