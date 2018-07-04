@@ -1,29 +1,32 @@
 #pragma glslify: snoise3 = require(glsl-noise/simplex/3d) 
 #define noiseScale 150.0 
+#define RADIUS 150.0 
 
 precision mediump float;
 
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 uniform float uTime;
+uniform vec2 uMouse;
 
 
 void main() {
-  vec4 color = texture2D(uSampler, vTextureCoord);
 
   // TODO this could maybe optimised to not call the noise function if not needed
-  float r = snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime + 1000.0));
-  float g = snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime + 2000.0));
-  float b = snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime));
+  float dist = distance(gl_FragCoord.xy, uMouse) / 75.0;
+  float offset = (snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime + 1000.0)) / 100.0) * dist;
+  vec4 color = texture2D(uSampler, vTextureCoord + offset - offset / 2.0);
 
-  float sinCoord = sin(gl_FragCoord.x + gl_FragCoord.y);
 
-  float a = color.a * (sinCoord + r + g + b) / 1.5;
+  float r = color.r;
+  float g = color.g;
+  float b = color.b;
+  float a = color.a;
   
   gl_FragColor = vec4(
-    r > 0.3 ? 0.4 : 0.0,
-    g > 0.3 ? 0.4 : 0.0,
-    b > 0.3 ? 0.4 : 0.0,
-    a > 0.5 ? 0.4 : 0.0
+    r,
+    g,
+    b,
+    a
   );
 }

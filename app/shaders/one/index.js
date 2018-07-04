@@ -7,9 +7,9 @@ export default {
       type: 'f',
       value: 0,
     },
-    uMouseX: {
-      type: 'f',
-      value: 0,
+    uMouse: {
+      type: 'v2',
+      value: [0, 0],
     },
   },
 }
