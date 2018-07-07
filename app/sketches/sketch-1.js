@@ -25,6 +25,7 @@ class sketch1 {
       width: this.c.width,
       height: this.c.height,
       transparent: true,
+      antialias: true,
     })
 
     this.app.renderer.autoResize = true
