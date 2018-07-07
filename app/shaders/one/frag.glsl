@@ -13,8 +13,8 @@ uniform vec2 uMouse;
 void main() {
 
   // TODO this could maybe optimised to not call the noise function if not needed
-  float dist = distance(gl_FragCoord.xy, uMouse) / 75.0;
-  float offset = (snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime + 1000.0)) / 100.0) * dist;
+  // float dist = distance(gl_FragCoord.xy, uMouse) / 75.0;
+  float offset = (snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime / 20.0)) / 100.0) * 10.0;
   vec4 color = texture2D(uSampler, vTextureCoord + offset - offset / 2.0);
 
 

@@ -41,6 +41,7 @@ class sketch1 {
     this.app.stage.filters = [
       this.filter,
     ]
+
     window.addEventListener('mousemove', ({ clientX, clientY }) => {
       this.filter.uniforms.uMouse[0] = clientX
       this.filter.uniforms.uMouse[1] = this.app.screen.height - clientY
@@ -48,7 +49,7 @@ class sketch1 {
   }
 
   initBg = () => {
-    const background = Sprite.fromImage('static/img/bg.jpeg')
+    const background = Sprite.fromImage('static/img/bg.1.png')
     background.width = this.app.screen.width
     background.height = this.app.screen.height
     this.app.stage.addChild(background)
