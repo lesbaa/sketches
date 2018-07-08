@@ -11,5 +11,9 @@ export default {
       type: 'v2',
       value: [0, 0],
     },
+    uTransitionProgress: {
+      type: 'v2',
+      value: 0,
+    },
   },
 }

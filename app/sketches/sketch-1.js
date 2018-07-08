@@ -4,12 +4,19 @@ import {
   Filter,
   Texture,
   Point,
+  Text,
   mesh,
+  Graphics,
+  Container,
+  TextStyle,
 } from 'pixi.js'
 
 import customShader from '../shaders/one'
 
 class sketch1 {
+
+  sprites = []
+
   constructor(selector) {
     this.c = document.querySelector(selector)
     this.c.width = window.innerWidth
@@ -25,14 +32,32 @@ class sketch1 {
       width: this.c.width,
       height: this.c.height,
       transparent: true,
+      backgroundColor: 0xeeeeee,
     })
 
     this.app.renderer.autoResize = true
     this.app.renderer.resize(window.innerWidth, window.innerHeight)
     
-    this.initBg()
-    this.initSprite()
     this.initFilter()
+
+    const textStyle = new TextStyle({
+      fontFamily: 'Arial Black',
+      fontSize: 100,
+      fontWeight: 'bold',
+      fill: '#eee',
+      stroke: '#000000',
+      strokeThickness: 10,
+    })
+
+    const text = new Text('some crazy text', textStyle)
+    text.anchor.set(0.5)
+    const container = new Container()
+    container.addChild(text)
+
+    container.x = this.app.screen.width / 2
+    container.y = this.app.screen.height / 2
+
+    this.app.stage.addChild(container)
     this.app.ticker.add(this.animate)
   }
 
@@ -48,24 +73,29 @@ class sketch1 {
     })
   }
 
-  initBg = () => {
-    const background = Sprite.fromImage('static/img/bg.1.png')
-    background.width = this.app.screen.width
-    background.height = this.app.screen.height
-    this.app.stage.addChild(background)
+  createSprite = () => {
+    const sprite = Sprite.fromImage('static/img/bg.1.png')
+    sprite.width = this.app.screen.width
+    sprite.height = this.app.screen.height
+    return sprite
   }
-  
-  initSprite = () => {
-    
+
+  createTransitions = () => {
+    return [
+      createSquaresTransition(),
+    ]
   }
 
   animate = () => {
     this.t += 0.1
-    const t = this.t
-
     this.filter.uniforms.uTime += 0.01
+    this.filter.uniforms.uTransitionProgress += 0.01
   }
 
 }
 
 export default new sketch1('#sketch-1')
+
+function createSquaresTransition() {
+  // const 
+} 
