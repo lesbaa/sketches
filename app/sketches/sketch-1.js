@@ -2,16 +2,12 @@ import {
   Application,
   Sprite,
   Filter,
-  Texture,
-  Point,
   Text,
-  mesh,
-  Graphics,
   Container,
   TextStyle,
 } from 'pixi.js'
 
-import customShader from '../shaders/one'
+import customShader from '../shaders/liquidMorph'
 
 class sketch1 {
 
