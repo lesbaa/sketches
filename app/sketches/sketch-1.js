@@ -16,6 +16,8 @@ import customShader from '../shaders/one'
 class sketch1 {
 
   sprites = []
+  
+  k = 0
 
   constructor(selector) {
     this.c = document.querySelector(selector)
@@ -47,6 +49,7 @@ class sketch1 {
       fill: '#eee',
       stroke: '#000000',
       strokeThickness: 10,
+      padding: 100,
     })
 
     const text = new Text('some crazy text', textStyle)
@@ -68,8 +71,7 @@ class sketch1 {
     ]
 
     window.addEventListener('mousemove', ({ clientX, clientY }) => {
-      this.filter.uniforms.uMouse[0] = clientX
-      this.filter.uniforms.uMouse[1] = this.app.screen.height - clientY
+      this.k = window.innerWidth / clientX
     })
   }
 
@@ -89,7 +91,7 @@ class sketch1 {
   animate = () => {
     this.t += 0.1
     this.filter.uniforms.uTime += 0.01
-    this.filter.uniforms.uTransitionProgress += 0.01
+    this.filter.uniforms.uTransitionProgress = this.k
   }
 
 }
