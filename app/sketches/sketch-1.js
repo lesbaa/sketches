@@ -7,7 +7,7 @@ import {
   TextStyle,
 } from 'pixi.js'
 
-import customShader from '../shaders/liquidMorph'
+import customShader from '../shaders/doom'
 
 class sketch1 {
 
@@ -40,7 +40,7 @@ class sketch1 {
 
     const textStyle = new TextStyle({
       fontFamily: 'Arial Black',
-      fontSize: 100,
+      fontSize: 150,
       fontWeight: 'bold',
       fill: '#eee',
       stroke: '#000000',
@@ -48,7 +48,7 @@ class sketch1 {
       padding: 100,
     })
 
-    const text = new Text('some crazy text', textStyle)
+    const text = new Text('hiya', textStyle)
     text.anchor.set(0.5)
     const container = new Container()
     container.addChild(text)
@@ -67,7 +67,7 @@ class sketch1 {
     ]
 
     window.addEventListener('mousemove', ({ clientX, clientY }) => {
-      this.k = window.innerWidth / clientX
+      this.k = (-clientY / window.innerHeight) + 0.5
     })
   }
 
