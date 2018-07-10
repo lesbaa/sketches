@@ -14,7 +14,7 @@ uniform vec2 uMouse;
 void main() {
   // TODO this could maybe optimised to not call the noise function if not needed
   vec2 glTextureCoord = normalize(2.0 * vTextureCoord - 0.5);
-  float noise = (snoise3(vec3(gl_FragCoord.xy / noiseScale, uTime / 20.0)) / 100.0) * 10.0;
+  float noise = (snoise3(vec3(gl_FragCoord.xy / pow(noiseScale * length(glTextureCoord), 5.0), uTime / 20.0)) / 100.0) * 10.0;
   float offset = mix(noise, 0.0, uTransitionProgress);
   vec2 vOffset = glTextureCoord * offset;
   bool mask = uTransitionProgress < noise * 4.0;

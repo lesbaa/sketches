@@ -7,7 +7,7 @@ import {
   TextStyle,
 } from 'pixi.js'
 
-import customShader from '../shaders/doom'
+import customShader from '../shaders/liquidMorph'
 
 class sketch1 {
 
@@ -67,7 +67,8 @@ class sketch1 {
     ]
 
     window.addEventListener('mousemove', ({ clientX, clientY }) => {
-      this.k = (-clientY / window.innerHeight) + 0.5
+      // this.k = (-clientY / window.innerHeight) + 0.5
+      this.k = window.innerHeight / clientY
     })
   }
 
