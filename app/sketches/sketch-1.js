@@ -5,11 +5,9 @@ import {
   Text,
   Container,
   TextStyle,
-  Shader,
 } from 'pixi.js'
 
-import customShader from '../shaders/pixelate'
-import lesShader from '../shaders/one'
+import customShader from '../shaders/sliced'
 
 class sketch1 {
 
@@ -44,17 +42,9 @@ class sketch1 {
       fontFamily: 'Arial Black',
       fontSize: 150,
       fontWeight: 'bold',
-      fill: '#eee',
-      stroke: '#000000',
-      strokeThickness: 10,
+      fill: '#000',
       padding: 100,
     })
-
-    this.shader = new Shader(
-      this.app.renderer.gl,
-      lesShader.vertex,
-      lesShader.fragment
-    )
 
     const text = new Text('hiya', textStyle)
     text.shader = this.shader
@@ -71,13 +61,12 @@ class sketch1 {
 
   initFilter = () => {
     this.filter = new Filter('', customShader.fragment, customShader.uniforms)
-    // this.app.stage.filters = [
-    //   this.filter,
-    // ]
+    this.app.stage.filters = [
+      this.filter,
+    ]
 
     window.addEventListener('mousemove', ({ clientX, clientY }) => {
-      this.k = (-clientY / window.innerHeight) + 0.5
-      console.log(this.shader)
+      this.k = (-clientY / window.innerHeight) + 1.0
     })
   }
 
@@ -85,7 +74,6 @@ class sketch1 {
     const sprite = Sprite.fromImage('static/img/bg.1.png')
     sprite.width = this.app.screen.width
     sprite.height = this.app.screen.height
-    sprite.shader = this.shader
     return sprite
   }
 
@@ -97,8 +85,8 @@ class sketch1 {
 
   animate = () => {
     this.t += 0.1
-    if (this.shader) this.shader.uniforms.uTime += 0.01
-    // this.filter.uniforms.uTransitionProgress = this.k
+    this.filter.uniforms.uTime += 0.01
+    this.filter.uniforms.uTransitionProgress = this.k
   }
 
 }
