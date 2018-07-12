@@ -13,7 +13,7 @@ uniform vec2 uMouse;
 
 
 void main() {
-  float tileSize = 5.0 / uTransitionProgress;
+  float tileSize = 2.5 / uTransitionProgress;
   float numSqrs = 0.5 / tileSize;
   float aspectRatio = uViewportResolution.x / uViewportResolution.y;
   float u = floor( vTextureCoord.x / numSqrs ) * numSqrs;
