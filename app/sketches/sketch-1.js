@@ -7,7 +7,7 @@ import {
   TextStyle,
 } from 'pixi.js'
 
-import customShader from '../shaders/liquidMorph'
+import customShader from '../shaders/pixelate'
 
 class sketch1 {
 
@@ -50,6 +50,7 @@ class sketch1 {
 
     const text = new Text('hiya', textStyle)
     text.anchor.set(0.5)
+    this.sprites.push(text)
     const container = new Container()
     container.addChild(text)
 
