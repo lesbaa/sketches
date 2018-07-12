@@ -1,7 +1,9 @@
 import fragment from './frag.glsl'
+import vertex from './vert.glsl'
 
 export default {
   fragment,
+  vertex,
   uniforms: {
     uTime: {
       type: 'f',

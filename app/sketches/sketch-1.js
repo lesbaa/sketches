@@ -5,9 +5,11 @@ import {
   Text,
   Container,
   TextStyle,
+  Shader,
 } from 'pixi.js'
 
 import customShader from '../shaders/pixelate'
+import lesShader from '../shaders/one'
 
 class sketch1 {
 
@@ -53,7 +55,13 @@ class sketch1 {
     this.sprites.push(text)
     const container = new Container()
     container.addChild(text)
-
+    
+    const shader = new Shader(
+      this.app.renderer.gl,
+      lesShader.vertex,
+      lesShader.fragment
+    )
+    console.log(shader)
     container.x = this.app.screen.width / 2
     container.y = this.app.screen.height / 2
 
