@@ -10,11 +10,11 @@ export default {
       value: 0,
     },
     uMouse: {
-      type: 'v2',
+      type: '2v',
       value: [0, 0],
     },
     uTransitionProgress: {
-      type: 'v2',
+      type: 'f',
       value: 0,
     },
   },
