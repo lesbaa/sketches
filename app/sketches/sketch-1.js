@@ -6,10 +6,10 @@ import {
   Texture,
   Container,
   TextStyle,
+  Graphics,
 } from 'pixi.js'
 
-import gloopFilter from '../shaders/gloop'
-import videoFilter from '../shaders/video'
+import gloopFilter from '../shaders/profileFilter'
 
 class sketch1 {
 
@@ -49,11 +49,15 @@ class sketch1 {
       padding: 100,
     })
 
-    const text = new Text('yer maw', textStyle)
-    text.anchor.set(0.5)
-    this.sprites.push(text)
+    const sprite = new Graphics()
+    sprite.beginFill(0x000000, 1.0)
+    sprite.drawRect(-100, -100, 200, 200)
+    sprite.endFill()
+
+    // sprite.anchor.set(0.5)
+    this.sprites.push(sprite)
     const container = new Container()
-    container.addChild(text)
+    container.addChild(sprite)
 
     container.x = this.app.screen.width / 2
     container.y = this.app.screen.height / 2
@@ -62,23 +66,12 @@ class sketch1 {
   }
   
   
-  initFilter = async () => {
+  initFilter = () => {
+    this.app.stage.filters = []
+    const uSampler = Texture.fromImage('/static/img/portrait.png')
+    this.filters = [new Filter('', gloopFilter.fragment, { ...gloopFilter.uniforms, uSamplerTwo: { type: 'sampler2D', value: uSampler }})]
+    this.app.stage.filters = this.filters
 
-    this.filters.push(new Filter('', gloopFilter.fragment, gloopFilter.uniforms))
-
-    const uSampler = Texture.fromVideo('/static/2.mp4')
-    this.filters.push(new Filter('', videoFilter.fragment, { ...videoFilter.uniforms, uSamplerTwo: { type: 'sampler2D', value: uSampler }}))
-
-    setInterval(() => {
-      this.app.stage.filters = [
-        this.filters[this.activeFilter],
-      ]
-
-      this.activeFilter = this.activeFilter + 1 >= this.filters.length
-        ? 0
-        : this.activeFilter + 1
-
-    }, 1000)
 
     window.addEventListener('mousemove', ({ clientX, clientY }) => {
       this.k = (-clientY / window.innerHeight) + 1.0
