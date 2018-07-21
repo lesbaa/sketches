@@ -9,7 +9,7 @@ import {
   Graphics,
 } from 'pixi.js'
 
-import gloopFilter from '../shaders/profileFilter'
+import gloopFilter from '../shaders/gloop'
 
 class sketch1 {
 
@@ -49,12 +49,8 @@ class sketch1 {
       padding: 100,
     })
 
-    const sprite = new Graphics()
-    sprite.beginFill(0x000000, 1.0)
-    sprite.drawRect(-100, -100, 200, 200)
-    sprite.endFill()
-
-    // sprite.anchor.set(0.5)
+    const sprite = new Sprite.fromImage('/static/img/profile.svg')
+    sprite.anchor.set(0.5)
     this.sprites.push(sprite)
     const container = new Container()
     container.addChild(sprite)
@@ -68,8 +64,8 @@ class sketch1 {
   
   initFilter = () => {
     this.app.stage.filters = []
-    const uSampler = Texture.fromImage('/static/img/portrait.png')
-    this.filters = [new Filter('', gloopFilter.fragment, { ...gloopFilter.uniforms, uSamplerTwo: { type: 'sampler2D', value: uSampler }})]
+    const uSampler = Texture.fromVideo('/static/2.mp4')
+    this.filters = [new Filter('', gloopFilter.fragment, { ...gloopFilter.uniforms })]
     this.app.stage.filters = this.filters
 
 
